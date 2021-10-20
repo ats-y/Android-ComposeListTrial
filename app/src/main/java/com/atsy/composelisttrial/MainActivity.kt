@@ -50,9 +50,9 @@ fun TodoList(vm: MainActivityViewModel) {
         // 一覧に行を追加するボタン
         Button(onClick = {
             vm.todoItems.add(0, LocalDateTime.now().toString())
-            coroutine.launch {
-                scrollState.animateScrollToItem(0)
-            }
+//            coroutine.launch {
+//                scrollState.animateScrollToItem(0)
+//            }
         }){
             Text(text = "行を追加する")
         }
@@ -64,6 +64,11 @@ fun TodoList(vm: MainActivityViewModel) {
         ){
             items(vm.todoItems) { todo ->
                 Text(text = todo)
+            }
+
+            // 一覧の末尾にスクロール。
+            coroutine.launch {
+                scrollState.scrollToItem(0)
             }
         }
     }
